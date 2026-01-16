@@ -4,6 +4,8 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import { Providers } from './providers/providers';
 import Header from './components/UI/header';
+import { layoutConfig } from './config/layout.config';
+import Footer from './components/UI/footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,13 +28,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ru">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
           <Header />
-          {children}
+          <main
+            className={`flex flex-col h-[calc(100vh-${layoutConfig.headerHeight}-${layoutConfig.footerHeight})] w-full justify-start items-center`}
+          >
+            {children}
+          </main>
+          <Footer />
         </Providers>
       </body>
     </html>
