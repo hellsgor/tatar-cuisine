@@ -542,7 +542,7 @@
     "@react-stately/menu" "3.9.9"
     "@react-types/menu" "3.10.5"
 
-"@heroui/form@2.1.29":
+"@heroui/form@2.1.29", "@heroui/form@^2.1.29":
   version "2.1.29"
   resolved "https://registry.yarnpkg.com/@heroui/form/-/form-2.1.29.tgz#fdc22bb793398146ea001e2ef71622bf11be6fed"
   integrity sha512-bWkd9SK+uuZN6gDVy/p9ccrpUryEjW4Y6y1EDaAsXYV8E9o/7JwIoWyZ0oxfskk1CS5TCHpKIYlb7mkdCeYmkA==
@@ -587,7 +587,7 @@
     "@react-types/textfield" "3.12.6"
     input-otp "1.4.1"
 
-"@heroui/input@2.4.30":
+"@heroui/input@2.4.30", "@heroui/input@^2.4.30":
   version "2.4.30"
   resolved "https://registry.yarnpkg.com/@heroui/input/-/input-2.4.30.tgz#871cbd07763a7ede60fbaefaaa098ac162d04143"
   integrity sha512-dTtQaZ21PofBIyWCnbysw2zpb5V8g6xu4mrZWO5faXt/bUjQLqmv3Y4MI1ghkWL6d0DB2xx0Z0I+U7LYMvoD4g==
@@ -660,7 +660,7 @@
     "@react-types/menu" "3.10.5"
     "@react-types/shared" "3.32.1"
 
-"@heroui/modal@2.2.26":
+"@heroui/modal@2.2.26", "@heroui/modal@^2.2.26":
   version "2.2.26"
   resolved "https://registry.yarnpkg.com/@heroui/modal/-/modal-2.2.26.tgz#5f727e5015b696124641178285657ed5c1a692df"
   integrity sha512-NpnjTEweNExUb3pZWr17u15N1OHbBac4QY4aObwcbIJZKsInLU8NbuLbwyRw9nwAshGSf2FdnQ6dhmDZqwNqfA==
@@ -976,7 +976,7 @@
   dependencies:
     "@react-types/shared" "3.32.1"
 
-"@heroui/system@2.4.25", "@heroui/system@^2.4.25":
+"@heroui/system@2.4.25":
   version "2.4.25"
   resolved "https://registry.yarnpkg.com/@heroui/system/-/system-2.4.25.tgz#60d14f492b0a52677432d98d088668eb4d25e81d"
   integrity sha512-F6UUoGTQ+Qas5wYkCzLjXE7u74Z9ygO0u0+dkTW7zCaY7ds65CcmvZ/ahKz2ES3Tk6TNks1MJSyaQ9rFLs8AqA==
@@ -1022,7 +1022,7 @@
     "@react-types/shared" "3.32.1"
     scroll-into-view-if-needed "3.0.10"
 
-"@heroui/theme@2.4.25", "@heroui/theme@^2.4.25":
+"@heroui/theme@2.4.25":
   version "2.4.25"
   resolved "https://registry.yarnpkg.com/@heroui/theme/-/theme-2.4.25.tgz#5ef08b400fbab209cc1fe52aedbde231b1ca9d24"
   integrity sha512-nTptYhO1V9rMoh9SJDnMfaSmFuoXvbem1UuwgHcraRtqy/TIVBPqv26JEGzSoUCL194TDGOJpqrpMuab/PdXcw==
@@ -3722,7 +3722,7 @@ for-each@^0.3.3, for-each@^0.3.5:
   dependencies:
     is-callable "^1.2.7"
 
-framer-motion@^12.26.2:
+framer-motion@12.26.2:
   version "12.26.2"
   resolved "https://registry.yarnpkg.com/framer-motion/-/framer-motion-12.26.2.tgz#6dcae8c06aa559c978745ec5f2e7d3fbbfad8eb6"
   integrity sha512-lflOQEdjquUi9sCg5Y1LrsZDlsjrHw7m0T9Yedvnk7Bnhqfkc89/Uha10J3CFhkL+TCZVCRw9eUGyM/lyYhXQA==
