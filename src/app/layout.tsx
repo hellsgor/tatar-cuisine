@@ -1,11 +1,11 @@
 import type { Metadata } from 'next';
-import { siteConfig } from './config/site.config';
+import { siteConfig } from '@/config/site.config';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
-import { Providers } from './providers/providers';
-import Header from './components/UI/header';
-import { layoutConfig } from './config/layout.config';
-import Footer from './components/UI/footer';
+import { Providers } from '@/providers/providers';
+import Header from '@/components/UI/header';
+import { layoutConfig } from '@/config/layout.config';
+import Footer from '@/components/UI/footer';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -35,7 +35,10 @@ export default function RootLayout({
         <Providers>
           <Header />
           <main
-            className={`flex flex-col h-[calc(100vh-${layoutConfig.headerHeight}-${layoutConfig.footerHeight})] w-full justify-start items-center`}
+            className={`flex flex-col w-full justify-start items-center`}
+            style={{
+              minHeight: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`,
+            }}
           >
             {children}
           </main>

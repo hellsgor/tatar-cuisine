@@ -6,4 +6,4 @@ export const siteConfig = {
     { href: '/ingredients', label: 'Ингредиенты' },
     { href: '/about', label: 'О нас' },
   ],
-};
+} as const;
