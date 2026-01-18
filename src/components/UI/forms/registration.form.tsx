@@ -38,6 +38,7 @@ export default function RegistrationForm({ onClose }: RegistrationFormProps) {
         placeholder="Введите email"
         type="email"
         value={formData.email}
+        autoComplete="email"
         classNames={{
           inputWrapper: 'bg-default-100',
           input: 'text-sm focus:outline-none',
@@ -58,6 +59,7 @@ export default function RegistrationForm({ onClose }: RegistrationFormProps) {
         placeholder="Введите пароль"
         type="password"
         value={formData.password}
+        autoComplete="off"
         classNames={{
           inputWrapper: 'bg-default-100',
           input: 'text-sm focus:outline-none',
@@ -78,6 +80,7 @@ export default function RegistrationForm({ onClose }: RegistrationFormProps) {
         placeholder="Подтвердите пароль"
         type="password"
         value={formData.confirmPassword}
+        autoComplete="off"
         classNames={{
           inputWrapper: 'bg-default-100',
           input: 'text-sm focus:outline-none',

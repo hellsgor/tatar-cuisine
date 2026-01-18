@@ -40,6 +40,7 @@ export default function LoginForm({ onClose }: LoginFormProps) {
           inputWrapper: 'bg-default-100',
           input: 'text-sm focus:outline-none',
         }}
+        autoComplete="email"
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         validate={(value) => {
           if (!value) return formErrors.required;
@@ -55,6 +56,7 @@ export default function LoginForm({ onClose }: LoginFormProps) {
         placeholder="Введите пароль"
         type="password"
         value={formData.password}
+        autoComplete="off"
         classNames={{
           inputWrapper: 'bg-default-100',
           input: 'text-sm focus:outline-none',
