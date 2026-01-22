@@ -7,6 +7,7 @@ import { Button } from '@heroui/react';
 
 type CustomFormProps<T> = {
   onClose: () => void;
+  onSubmitCallback: () => void;
   children: ReactNode;
   formData: T;
   actionButtonText: string;
@@ -14,15 +15,15 @@ type CustomFormProps<T> = {
 
 export default function CustomForm<T>({
   children,
-  formData,
   onClose,
   actionButtonText,
+  onSubmitCallback,
 }: CustomFormProps<T>) {
   return (
     <Form
       className="w-full"
       onSubmit={(e) => {
-        handleSubmit<T>(e, formData, onClose);
+        handleSubmit(e, onClose, onSubmitCallback);
       }}
     >
       {children}

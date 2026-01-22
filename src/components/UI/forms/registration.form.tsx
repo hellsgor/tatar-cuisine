@@ -5,16 +5,12 @@ import { formErrors } from '@/config/forms.config';
 import { useState } from 'react';
 import { validateEmail } from '@/helpers/validateEmail';
 import CustomForm from '@/components/common/form';
+import { RegistrationFormData } from '@/types/registration-form-data';
+import { registerUser } from '@/actions/register';
 
 type RegistrationFormProps = {
   onClose: () => void;
 };
-
-interface RegistrationFormData {
-  email: string;
-  password: string;
-  confirmPassword: string;
-}
 
 export default function RegistrationForm({ onClose }: RegistrationFormProps) {
   const [formData, setFormData] = useState<RegistrationFormData>({
@@ -27,6 +23,10 @@ export default function RegistrationForm({ onClose }: RegistrationFormProps) {
       onClose={onClose}
       formData={formData}
       actionButtonText="Зарегистрироваться"
+      onSubmitCallback={async () => {
+        const result = await registerUser(formData);
+        console.log('result in registration form:', result);
+      }}
     >
       <Input
         aria-label="email"

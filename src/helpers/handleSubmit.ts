@@ -1,10 +1,12 @@
-export async function handleSubmit<T>(
+export async function handleSubmit(
   e: React.FormEvent,
-  formData: T,
-  callback: () => void,
+  callback?: () => void,
+  onSubmitCallback?: () => void,
 ) {
-  e.preventDefault();
-  console.log('Form submitted', formData);
+  if (!callback && !onSubmitCallback) return;
 
-  callback();
+  e.preventDefault();
+
+  if (onSubmitCallback) onSubmitCallback();
+  if (callback) callback();
 }
