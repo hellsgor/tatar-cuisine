@@ -1,0 +1,16 @@
+# Ignore artifacts:
+build
+coverage
+
+# Dependencies
+node_modules
+
+# Next.js
+.next
+out
+
+# Other
+*.lock
+yarn.lock
+package-lock.json
+pnpm-lock.yaml
