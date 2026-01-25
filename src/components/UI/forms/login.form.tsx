@@ -4,6 +4,7 @@ import { Input } from '@heroui/input';
 import { formErrors } from '@/config/forms.config';
 import { useState } from 'react';
 import CustomForm from '@/components/common/form';
+import { signInWithCredentials } from '@/actions/sign-in';
 
 type LoginFormProps = {
   onClose: () => void;
@@ -22,9 +23,15 @@ export default function LoginForm({ onClose }: LoginFormProps) {
 
   return (
     <CustomForm<LoginFormData>
-      onClose={onClose}
+      onClose={() => {
+        window.location.reload();
+        onClose();
+      }}
       formData={formData}
       actionButtonText="Войти"
+      onSubmitCallback={() =>
+        signInWithCredentials(formData.email, formData.password)
+      }
     >
       <Input
         aria-label="email"

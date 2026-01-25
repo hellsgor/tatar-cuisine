@@ -6,6 +6,9 @@ import { Providers } from '@/providers/providers';
 import Header from '@/components/UI/header';
 import { layoutConfig } from '@/config/layout.config';
 import Footer from '@/components/UI/footer';
+import { SessionProvider } from 'next-auth/react';
+import { auth } from '@/auth/auth';
+import AppLoader from '@/hoc/app-loader';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -22,27 +25,32 @@ export const metadata: Metadata = {
   description: siteConfig.description,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session = await auth();
   return (
     <html lang="ru">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-          <Header />
-          <main
-            className={`flex flex-col w-full justify-start items-center`}
-            style={{
-              minHeight: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`,
-            }}
-          >
-            {children}
-          </main>
-          <Footer />
+          <SessionProvider session={session}>
+            <AppLoader>
+              <Header />
+              <main
+                className={`flex flex-col w-full justify-start items-center`}
+                style={{
+                  minHeight: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`,
+                }}
+              >
+                {children}
+              </main>
+              <Footer />
+            </AppLoader>
+          </SessionProvider>
         </Providers>
       </body>
     </html>

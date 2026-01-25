@@ -24,8 +24,7 @@ export default function RegistrationForm({ onClose }: RegistrationFormProps) {
       formData={formData}
       actionButtonText="Зарегистрироваться"
       onSubmitCallback={async () => {
-        const result = await registerUser(formData);
-        console.log('result in registration form:', result);
+        await registerUser(formData);
       }}
     >
       <Input

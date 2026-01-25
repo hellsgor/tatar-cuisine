@@ -7,7 +7,7 @@ import { Button } from '@heroui/react';
 
 type CustomFormProps<T> = {
   onClose: () => void;
-  onSubmitCallback: () => void;
+  onSubmitCallback: () => Promise<unknown>;
   children: ReactNode;
   formData: T;
   actionButtonText: string;
