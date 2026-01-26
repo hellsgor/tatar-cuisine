@@ -9,6 +9,7 @@ import { layoutConfig } from '@/config/layout.config';
 import { SessionProvider } from 'next-auth/react';
 import { auth } from '@/auth/auth';
 import AppLoader from '@/hoc/app-loader';
+import Title from '@/components/common/title';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -46,6 +47,7 @@ export default async function RootLayout({
                   minHeight: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`,
                 }}
               >
+                <Title />
                 {children}
               </main>
               <Footer />
