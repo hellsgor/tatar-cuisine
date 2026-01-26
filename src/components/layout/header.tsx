@@ -12,9 +12,9 @@ import {
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import LoginModal from './modals/login.modal';
+import LoginModal from '@/components/features/auth/login.modal';
 import { useState } from 'react';
-import { RegistrationModal } from './modals/registration.modal';
+import { RegistrationModal } from '@/components/features/auth/registration.modal';
 import { signOutFunc } from '@/actions/sign-out';
 import { useAuthStore } from '@/store/auth.store';
 

@@ -1,7 +1,7 @@
 'use client';
 
 import CustomModal, { type CustomModalProps } from '@/components/common/modal';
-import RegistrationForm from '../forms/registration.form';
+import RegistrationForm from './registration.form';
 
 type RegistrationModalProps = Pick<CustomModalProps, 'isOpen' | 'onClose'>;
 
