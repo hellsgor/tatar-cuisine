@@ -1,31 +1,32 @@
 'use client';
 
-import { IngredientsFormData } from '@/types/ingredients-form-data';
 import { useState } from 'react';
-import CustomForm from '@/components/common/form';
 import { Input } from '@heroui/input';
 import { FORM_ERRORS } from '@/config/forms.config';
-import { Select, SelectItem } from '@heroui/react';
+import { Button, Form, Select, SelectItem } from '@heroui/react';
 import { CATEGORY_OPTIONS, UNIT_OPTIONS } from '@/config/select-options';
+import { createIngredient } from '@/actions/ingredient';
+import type { IngredientsFormData } from '@/schema/zod';
 
 export default function IngredientsForm() {
-  const [formData, setFormData] = useState<IngredientsFormData>({
+  const initialState: Partial<IngredientsFormData> = {
     name: '',
-    category: '',
+    category: undefined,
     description: '',
     pricePerUnit: null,
-    unit: '',
-  });
+    unit: undefined,
+  };
+  const [formData, setFormData] =
+    useState<Partial<IngredientsFormData>>(initialState);
+
+  const handleSubmit = async (formData: FormData) => {
+    console.log('Form submitted:', formData);
+    await createIngredient(formData);
+    setFormData(initialState);
+  };
 
   return (
-    <CustomForm<IngredientsFormData>
-      formData={formData}
-      className="w-[400px]"
-      actionButtonText="Добавить ингредиент"
-      onSubmitCallback={async () => {
-        console.log('Form Submitted:', formData);
-      }}
-    >
+    <Form className="w-[400px]" action={handleSubmit}>
       <Input
         isRequired
         aria-label="Имя ингредиента"
@@ -59,7 +60,10 @@ export default function IngredientsForm() {
               selectorIcon: 'text-black',
             }}
             onChange={(e) =>
-              setFormData({ ...formData, category: e.target.value })
+              setFormData({
+                ...formData,
+                category: e.target.value as IngredientsFormData['category'],
+              })
             }
           >
             {CATEGORY_OPTIONS.map((option) => (
@@ -73,7 +77,7 @@ export default function IngredientsForm() {
         <div className="w-1/3">
           <Select
             isRequired
-            name="pricePerUnit"
+            name="unit"
             aria-label="Единицы измерения ингредиента"
             placeholder="Ед. изм."
             selectedKeys={formData.unit ? [formData.unit] : []}
@@ -83,7 +87,12 @@ export default function IngredientsForm() {
               value: 'truncate',
               selectorIcon: 'text-black',
             }}
-            onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
+            onChange={(e) =>
+              setFormData({
+                ...formData,
+                unit: e.target.value as IngredientsFormData['unit'],
+              })
+            }
           >
             {UNIT_OPTIONS.map((option) => (
               <SelectItem key={option.value} className="text-black">
@@ -101,7 +110,7 @@ export default function IngredientsForm() {
             placeholder="Цена"
             type="number"
             value={
-              formData.pricePerUnit !== null
+              formData.pricePerUnit != null
                 ? formData.pricePerUnit.toString()
                 : ''
             }
@@ -142,6 +151,11 @@ export default function IngredientsForm() {
           setFormData({ ...formData, description: e.target.value })
         }
       />
-    </CustomForm>
+      <div className="flex w-full gap-4 items-center pt-8 justify-end">
+        <Button color="primary" type="submit">
+          Добавить ингредиент
+        </Button>
+      </div>
+    </Form>
   );
 }

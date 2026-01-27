@@ -8,7 +8,8 @@ import { clsx } from 'clsx';
 
 type CustomFormProps<T> = {
   onClose?: () => void;
-  onSubmitCallback: () => Promise<unknown>;
+  onSubmitCallback?: () => Promise<unknown>;
+  onSubmitAction?: (formData: FormData) => Promise<unknown>;
   children: ReactNode;
   formData: T;
   actionButtonText: string;
