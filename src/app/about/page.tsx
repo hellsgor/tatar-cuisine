@@ -1,7 +1,9 @@
+import PageContent from '@/components/common/page-content';
+
 export default function AboutPage() {
   return (
     <div>
-      <h1>О нас</h1>
+      <PageContent />
     </div>
   );
 }

@@ -42,7 +42,7 @@ export default async function RootLayout({
             <AppLoader>
               <Header />
               <main
-                className={`flex flex-col w-full justify-start items-center`}
+                className={`flex flex-col max-w-[1024px] justify-start items-center mx-auto px-6`}
                 style={{
                   minHeight: `calc(100vh - ${layoutConfig.headerHeight} - ${layoutConfig.footerHeight})`,
                 }}

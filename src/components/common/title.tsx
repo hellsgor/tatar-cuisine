@@ -9,10 +9,8 @@ export default function Title() {
     (item) => item.href === pathname,
   );
   return (
-    <div className="w-full flex justify-center mt-6 mb-12">
-      <h1 className="text-3xl font-bold">
-        {currentNavItem?.label ?? siteConfig.title}
-      </h1>
-    </div>
+    <h1 className="text-3xl font-bold text-center my-6">
+      {currentNavItem?.label ?? siteConfig.title}
+    </h1>
   );
 }
