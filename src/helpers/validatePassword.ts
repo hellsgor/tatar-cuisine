@@ -1,4 +1,4 @@
-import { formErrors, PASSWORD_MIN_LENGTH } from '@/config/forms.config';
+import { FORM_ERRORS, PASSWORD_MIN_LENGTH } from '@/config/forms.config';
 import { RegistrationFormData } from '@/types/registration-form-data';
 
 type validatePasswordFuncProps = Pick<
@@ -11,11 +11,11 @@ export function validatePassword({
   confirmPassword,
 }: validatePasswordFuncProps) {
   if (password !== confirmPassword) {
-    return formErrors.passwordsNotMatch;
+    return FORM_ERRORS.passwordsNotMatch;
   }
 
   if (password.length < PASSWORD_MIN_LENGTH) {
-    return formErrors.shortPassword;
+    return FORM_ERRORS.shortPassword;
   }
 
   return false;

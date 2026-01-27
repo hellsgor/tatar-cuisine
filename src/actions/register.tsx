@@ -1,6 +1,6 @@
 'use server';
 
-import { formErrors } from '@/config/forms.config';
+import { FORM_ERRORS } from '@/config/forms.config';
 import { saltAndHashPassword } from '@/helpers/password';
 import { prisma } from '@/helpers/prisma';
 import { validatePassword } from '@/helpers/validatePassword';
@@ -20,7 +20,7 @@ export async function registerUser(formData: RegistrationFormData) {
     const existingUser = await prisma.user.findUnique({
       where: { email },
     });
-    if (existingUser) return { error: formErrors.existingUser };
+    if (existingUser) return { error: FORM_ERRORS.existingUser };
 
     const pwHash = await saltAndHashPassword(password);
     const user = await prisma.user.create({

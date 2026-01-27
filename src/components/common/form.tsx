@@ -4,13 +4,15 @@ import { Form } from '@heroui/form';
 import { handleSubmit } from '@/helpers/handleSubmit';
 import { ReactNode } from 'react';
 import { Button } from '@heroui/react';
+import { clsx } from 'clsx';
 
 type CustomFormProps<T> = {
-  onClose: () => void;
+  onClose?: () => void;
   onSubmitCallback: () => Promise<unknown>;
   children: ReactNode;
   formData: T;
   actionButtonText: string;
+  className?: string;
 };
 
 export default function CustomForm<T>({
@@ -18,19 +20,22 @@ export default function CustomForm<T>({
   onClose,
   actionButtonText,
   onSubmitCallback,
+  className,
 }: CustomFormProps<T>) {
   return (
     <Form
-      className="w-full"
+      className={clsx('w-full', className)}
       onSubmit={(e) => {
         handleSubmit(e, onClose, onSubmitCallback);
       }}
     >
       {children}
       <div className="flex w-full gap-4 items-center pt-8 justify-end">
-        <Button variant="light" onPress={onClose}>
-          Отмена
-        </Button>
+        {onClose && (
+          <Button variant="light" onPress={onClose}>
+            Отмена
+          </Button>
+        )}
         <Button color="primary" type="submit">
           {actionButtonText}
         </Button>

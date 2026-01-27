@@ -1,7 +1,7 @@
 'use client';
 
 import { Input } from '@heroui/input';
-import { formErrors } from '@/config/forms.config';
+import { FORM_ERRORS } from '@/config/forms.config';
 import { useState } from 'react';
 import { validateEmail } from '@/helpers/validateEmail';
 import CustomForm from '@/components/common/form';
@@ -44,8 +44,8 @@ export default function RegistrationForm({ onClose }: RegistrationFormProps) {
         }}
         onChange={(e) => setFormData({ ...formData, email: e.target.value })}
         validate={(value) => {
-          if (!value) return formErrors.required;
-          if (!validateEmail(value)) return formErrors.incorrectEmail;
+          if (!value) return FORM_ERRORS.required;
+          if (!validateEmail(value)) return FORM_ERRORS.incorrectEmail;
           return null;
         }}
       />
@@ -65,8 +65,8 @@ export default function RegistrationForm({ onClose }: RegistrationFormProps) {
         }}
         onChange={(e) => setFormData({ ...formData, password: e.target.value })}
         validate={(value) => {
-          if (!value) return formErrors.required;
-          if (value.length < 8) return formErrors.shortPassword;
+          if (!value) return FORM_ERRORS.required;
+          if (value.length < 8) return FORM_ERRORS.shortPassword;
           return null;
         }}
       />
@@ -88,8 +88,8 @@ export default function RegistrationForm({ onClose }: RegistrationFormProps) {
           setFormData({ ...formData, confirmPassword: e.target.value })
         }
         validate={(value) => {
-          if (!value) return formErrors.required;
-          if (value !== formData.password) return formErrors.passwordsNotMatch;
+          if (!value) return FORM_ERRORS.required;
+          if (value !== formData.password) return FORM_ERRORS.passwordsNotMatch;
           return null;
         }}
       />
