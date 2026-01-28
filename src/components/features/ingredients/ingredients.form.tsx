@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useTransition } from 'react';
 import { Input } from '@heroui/input';
 import { FORM_ERRORS } from '@/config/forms.config';
 import { Button, Form, Select, SelectItem } from '@heroui/react';
@@ -21,16 +21,21 @@ export default function IngredientsForm() {
 
   const [error, setError] = useState<string | null>();
 
+  const [isPending, startTransition] = useTransition();
+
   const handleSubmit = async (formData: FormData) => {
     console.log('Form submitted:', formData);
-    const result = await createIngredient(formData);
 
-    if (result.error) {
-      setError(result.error);
-    } else {
-      setError(null);
-      setFormData(initialState);
-    }
+    startTransition(async () => {
+      const result = await createIngredient(formData);
+
+      if (result.error) {
+        setError(result.error);
+      } else {
+        setError(null);
+        setFormData(initialState);
+      }
+    });
   };
 
   return (
@@ -163,7 +168,7 @@ export default function IngredientsForm() {
       {error && <p className="text-red-500">{error}</p>}
 
       <div className="flex w-full gap-4 items-center justify-end">
-        <Button color="primary" type="submit">
+        <Button color="primary" type="submit" isLoading={isPending}>
           Добавить ингредиент
         </Button>
       </div>
