@@ -40,7 +40,7 @@ export default function IngredientsForm() {
   };
 
   return (
-    <Form className="w-[400px]" action={handleSubmit}>
+    <Form className="w-full" action={handleSubmit}>
       <Input
         isRequired
         aria-label="Имя ингредиента"
