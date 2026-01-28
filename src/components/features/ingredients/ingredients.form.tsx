@@ -5,8 +5,8 @@ import { Input } from '@heroui/input';
 import { FORM_ERRORS } from '@/config/forms.config';
 import { Button, Form, Select, SelectItem } from '@heroui/react';
 import { CATEGORY_OPTIONS, UNIT_OPTIONS } from '@/config/select-options';
-import { createIngredient } from '@/actions/ingredient';
 import type { IngredientsFormData } from '@/schema/zod';
+import { useIngredientStore } from '@/store/ingredient.store';
 
 export default function IngredientsForm() {
   const initialState: Partial<IngredientsFormData> = {
@@ -16,6 +16,8 @@ export default function IngredientsForm() {
     pricePerUnit: null,
     unit: undefined,
   };
+  const { addIngredient } = useIngredientStore();
+
   const [formData, setFormData] =
     useState<Partial<IngredientsFormData>>(initialState);
 
@@ -24,13 +26,12 @@ export default function IngredientsForm() {
   const [isPending, startTransition] = useTransition();
 
   const handleSubmit = async (formData: FormData) => {
-    console.log('Form submitted:', formData);
-
     startTransition(async () => {
-      const result = await createIngredient(formData);
+      await addIngredient(formData);
+      const storeError = useIngredientStore.getState().error;
 
-      if (result.error) {
-        setError(result.error);
+      if (storeError) {
+        setError(storeError);
       } else {
         setError(null);
         setFormData(initialState);
