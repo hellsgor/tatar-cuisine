@@ -19,10 +19,18 @@ export default function IngredientsForm() {
   const [formData, setFormData] =
     useState<Partial<IngredientsFormData>>(initialState);
 
+  const [error, setError] = useState<string | null>();
+
   const handleSubmit = async (formData: FormData) => {
     console.log('Form submitted:', formData);
-    await createIngredient(formData);
-    setFormData(initialState);
+    const result = await createIngredient(formData);
+
+    if (result.error) {
+      setError(result.error);
+    } else {
+      setError(null);
+      setFormData(initialState);
+    }
   };
 
   return (
@@ -151,7 +159,10 @@ export default function IngredientsForm() {
           setFormData({ ...formData, description: e.target.value })
         }
       />
-      <div className="flex w-full gap-4 items-center pt-8 justify-end">
+
+      {error && <p className="text-red-500">{error}</p>}
+
+      <div className="flex w-full gap-4 items-center justify-end">
         <Button color="primary" type="submit">
           Добавить ингредиент
         </Button>
