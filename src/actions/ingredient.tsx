@@ -45,8 +45,20 @@ export async function getIngredients() {
     return { success: true, ingredients };
   } catch (e) {
     const errorText = 'Ошибка при получении ингредиентов';
-    console.error(errorText, e);
+    console.log(errorText, e);
     return { error: errorText };
   }
 }
 
+export async function deleteIngredient(id: string) {
+  try {
+    const ingredient = await prisma.ingredient.delete({
+      where: { id },
+    });
+    return { success: true, ingredient };
+  } catch (e) {
+    const errorText = 'Ошибка при удалении ингредиента';
+    console.log(errorText, e);
+    return { error: errorText };
+  }
+}
