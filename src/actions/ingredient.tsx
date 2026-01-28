@@ -38,3 +38,15 @@ export async function createIngredient(formData: FormData) {
     return { error };
   }
 }
+
+export async function getIngredients() {
+  try {
+    const ingredients = await prisma.ingredient.findMany();
+    return { success: true, ingredients };
+  } catch (e) {
+    const errorText = 'Ошибка при получении ингредиентов';
+    console.error(errorText, e);
+    return { error: errorText };
+  }
+}
+
