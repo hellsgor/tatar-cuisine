@@ -49,18 +49,23 @@ export default function Header() {
   };
 
   const renderNavItems = () =>
-    siteConfig.navItems.map(({ href, label }, i) => (
-      <NavbarItem key={i}>
-        <Link
-          href={href}
-          className={`px-3 py-1 rounded-md border-1 border-transparent  ${
-            pathname === href ? 'text-blue-500' : 'text-foreground'
-          } hover:text-blue-300 hover:border-blue-300 transition-colors transition-border duration-200`}
-        >
-          {label}
-        </Link>
-      </NavbarItem>
-    ));
+    siteConfig.navItems
+      .filter(({ href }) => {
+        if (href === '/ingredients') return isAuth;
+        return true;
+      })
+      .map(({ href, label }, i) => (
+        <NavbarItem key={i}>
+          <Link
+            href={href}
+            className={`px-3 py-1 rounded-md border-1 border-transparent  ${
+              pathname === href ? 'text-blue-500' : 'text-foreground'
+            } hover:text-blue-300 hover:border-blue-300 transition-colors transition-border duration-200`}
+          >
+            {label}
+          </Link>
+        </NavbarItem>
+      ));
 
   return (
     <Navbar
