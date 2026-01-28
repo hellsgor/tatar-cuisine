@@ -20,6 +20,7 @@ export default function LoginForm({ onClose }: LoginFormProps) {
     email: '',
     password: '',
   });
+  const [error, setError] = useState<string | null>(null);
 
   return (
     <CustomForm<LoginFormData>
@@ -29,6 +30,8 @@ export default function LoginForm({ onClose }: LoginFormProps) {
       }}
       formData={formData}
       actionButtonText="Войти"
+      error={error}
+      onError={setError}
       onSubmitCallback={() =>
         signInWithCredentials(formData.email, formData.password)
       }

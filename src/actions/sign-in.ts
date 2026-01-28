@@ -12,6 +12,6 @@ export async function signInWithCredentials(email: string, password: string) {
     return result;
   } catch (e) {
     console.error('Ошибка авторизации:', e);
-    throw e;
+    throw new Error('Неверный email или пароль');
   }
 }
