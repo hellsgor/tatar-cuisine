@@ -1,8 +1,10 @@
 import { prisma } from '@/helpers/prisma';
+import { Recipe } from '@/types/recipe';
+import { Ingredient } from '@/types/ingredient';
 
 export async function getRecipes() {
   try {
-    const recipes = await prisma.recipe.findMany({
+    const recipesFromDb = await prisma.recipe.findMany({
       include: {
         recipeIngredients: {
           include: {
@@ -11,7 +13,21 @@ export async function getRecipes() {
         },
       },
     });
-    return ({ success: true, recipes });
+
+    const recipes = recipesFromDb.map(recipe => ({
+      id: recipe.id,
+      name: recipe.name,
+      description: recipe.description,
+      imageUrl: recipe.imageUrl,
+      ingredients: recipe.recipeIngredients.map(ri => ({
+        id: ri.id,
+        ingredientId: ri.ingredientId,
+        quantity: ri.quantity,
+        ingredient: ri.ingredient,
+      })),
+    }));
+
+    return { success: true, recipes };
   } catch (error) {
     const errorText = 'Ошибка при загрузке рецептов';
     console.log(errorText);
@@ -32,13 +48,13 @@ export async function createRecipe(formData: FormData) {
       return { error, success };
     }
 
-    const recipe = (name && description && imageUrl && ingredients) && await prisma.recipe.create({
+    const recipe = await prisma.recipe.create({
       data: {
-        name,
-        description,
+        name: name!,
+        description: description!,
         imageUrl,
         recipeIngredients: {
-          create: ingredients.map(({ ingredientId, quantity }) => ({
+          create: ingredients?.map(({ ingredientId, quantity }) => ({
             ingredient: { connect: { id: ingredientId } },
             quantity,
           })),
@@ -53,7 +69,7 @@ export async function createRecipe(formData: FormData) {
       },
     });
 
-    return ({ success: true, recipe });
+    return ({ success: true, recipe: toRecipe(recipe) });
   } catch (error) {
     const errorText = 'Ошибка при создании рецепта';
     console.log(errorText);
@@ -97,7 +113,7 @@ export async function updateRecipe(id: string, formData: FormData) {
       },
     });
 
-    return { success: true, recipe };
+    return { success: true, recipe: toRecipe(recipe) };
 
   } catch (error) {
     const errorText = 'Ошибка при обновлении рецепта';
@@ -122,6 +138,32 @@ export async function deleteRecipe(id: string) {
     console.log(errorText, error);
     return ({ success: false, error: errorText });
   }
+}
+
+function toRecipe(recipe: {
+  id: string;
+  name: string;
+  description: string;
+  imageUrl: string | null;
+  recipeIngredients: Array<{
+    id: string;
+    ingredientId: string;
+    quantity: number;
+    ingredient: Ingredient;
+  }>;
+}): Recipe {
+  return {
+    id: recipe.id,
+    name: recipe.name,
+    description: recipe.description,
+    imageUrl: recipe.imageUrl,
+    ingredients: recipe.recipeIngredients.map((ri) => ({
+      id: ri.id,
+      ingredientId: ri.ingredientId,
+      quantity: ri.quantity,
+      ingredient: ri.ingredient,
+    })),
+  };
 }
 
 const getRecipeData = ({ formData, error }: { formData: FormData, error: string; }) => {
