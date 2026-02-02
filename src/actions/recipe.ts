@@ -1,3 +1,5 @@
+'use server';
+
 import { prisma } from '@/helpers/prisma';
 import { Recipe } from '@/types/recipe';
 import { Ingredient } from '@/types/ingredient';
