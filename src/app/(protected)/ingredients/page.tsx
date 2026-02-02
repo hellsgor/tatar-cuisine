@@ -6,7 +6,7 @@ import IngredientsForm from '@/components/features/ingredients/ingredients.form'
 export default async function IngredientsPage() {
   const session = await auth();
   if (!session) {
-    redirect('/error?message=Недостаточно прав');
+    redirect('/error?message=' + encodeURIComponent('Недостаточно прав'));
   }
 
   return (
